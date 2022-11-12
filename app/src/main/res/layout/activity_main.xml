@@ -6,139 +6,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <LinearLayout
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center">
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/a"
-        android:orientation="vertical"
+        android:text="settings"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:id="@+id/settings"
         tools:ignore="MissingConstraints">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="top"
-            android:text="satiety - " />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fatigue - " />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="gladness - " />
-
-    </LinearLayout>
-    <LinearLayout
+    </Button>
+    <View
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"></View>
+    <Button
+        android:text="Start the game"
         android:layout_width="wrap_content"
+        android:gravity="center"
+        android:id="@+id/srart"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/a"
-        android:orientation="vertical"
-
         tools:ignore="MissingConstraints">
-        <TextView
-            android:layout_width="wrap_content"
-            android:id="@+id/satiety"
-            android:layout_height="wrap_content">
 
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:id="@+id/fatigue"
-            android:layout_height="wrap_content">
-
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:id="@+id/gladness"
-            android:layout_height="wrap_content">
-
-        </TextView>
-    </LinearLayout>
-
+    </Button>
+</LinearLayout>
     <TextView
-        android:id="@+id/counter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints">
-
-
-    </TextView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="97dp">
-
-        <Button
-            android:id="@+id/uraxanal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="play"
-            tools:ignore="MissingConstraints">
-
-
-        </Button>
-
-        <Button
-            android:id="@+id/tarmanal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="sleep"
-
-            tools:ignore="MissingConstraints">
-
-
-        </Button>
-
-        <Button
-            android:id="@+id/utel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="eat"
-            tools:ignore="MissingConstraints">
-
-
-        </Button>
-
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-
+        android:text="Tamagochi"
         android:textSize="50dp"
-        tools:ignore="MissingConstraints">
-
-    </TextView>
-    <TextView
-        android:layout_width="match_parent"
-        android:id="@+id/result"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/finish"
-        tools:ignore="MissingConstraints"
-        android:textSize="40dp"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scrollbarSize="10000dp"
-        android:src="@drawable/urax_marduk"
-        app:layout_constraintTop_toBottomOf="@id/result"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="83dp">
-
-    </ImageView>
+        android:textColor="@color/black"
+        android:gravity="center"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
