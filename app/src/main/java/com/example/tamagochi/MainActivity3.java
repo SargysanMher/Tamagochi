@@ -4,51 +4,59 @@ package com.example.tamagochi;
 
 import java.io.*;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.renderscript.Sampler;
-import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+
+
+public class MainActivity3 extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private boolean is_started=true;
-    TextView satiety,fatigue,gladness,counter,finish,stop;
-    String p,food,hognacutyun,uraxutyun;
-    Button uraxanal,utel,tarmanal;
+    private final static String FILE_NAME = "Best_Result_Tamagotchi_Hard";
+    TextView satiety,fatigue,gladness,counter,finish,money,stop;
+    String p,food,hognacutyun,uraxutyun,money2;
+    Button uraxanal,utel,tarmanal,ashxatel;
     int a =100;
-    int diff = 0;
     int b =100;
     int c =100;
+    int diff = 1;
     int h = 1;
-    int element = 0;
+    int element = 1;
+    String resultat;
     int j = 0;
+    int money1 = 100;
     int counter1;
-    private final static String FILE_NAME = "Best_Result_Tamagotchi_Easy";
+
 
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
-
-        stop = findViewById(R.id.stop);
+        setContentView(R.layout.activity_main3);
+        ashxatel = findViewById(R.id.ashxatel);
+        money=findViewById(R.id.money);
         satiety = findViewById(R.id.satiety);
         fatigue = findViewById(R.id.fatigue);
         gladness = findViewById(R.id.gladness);
+        stop = findViewById(R.id.stop);
+        Intent i= getIntent();
         counter = findViewById(R.id.counter);
         finish = findViewById(R.id.finish);
         utel = findViewById(R.id.utel);
@@ -56,8 +64,29 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
         uraxanal = findViewById(R.id.uraxanal);
 
 
+        File file = new File("Best.txt");
 
+        try {
+            PrintWriter pw = new PrintWriter(file);
+            pw.println(6);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            while((resultat=br.readLine())!=null){
+                element = Integer.parseInt(resultat);
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            PrintWriter pw = new PrintWriter(file);
+            if(element==0){
+                pw.print(0);
+                pw.close();
 
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
 
 
@@ -65,93 +94,108 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
         new Thread() {
             @SuppressLint("SetTextI18n")
             @Override
-
             public void run() {
-                while (true){
+
+                while (is_started) {
+                    ashxatel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            money1 += 5;
+                            b -= 5;
+                            money2 = String.valueOf(money1);
+                            runOnUiThread(() -> money.setText(money2));
+                            hognacutyun = String.valueOf(b);
+                            runOnUiThread(() -> fatigue.setText(hognacutyun));
+                        }
+                    });
+                    tarmanal.setOnClickListener(view -> {
+                        if (b < 100) {
+                            if (b + 4 == 100) {
+                                b += 4;
+                            } else if (b + 3 == 100) {
+                                b += 3;
+                            } else if (b + 2 == 100) {
+                                b += 2;
+                            } else if (b + 1 == 100) {
+                                b += 1;
+                            } else {
+                                b += 5;
+                            }
+
+                            hognacutyun = String.valueOf(b);
+                            runOnUiThread(() -> fatigue.setText(hognacutyun));
+                        }
+
+
+                    });
+                    uraxanal.setOnClickListener(view -> {
+                        if (c < 100 & money1 > 0) {
+                            if (c + 4 == 100) {
+                                c += 4;
+                                money1 -= 8;
+                            } else if (c + 3 == 100) {
+                                c += 3;
+                                money1 -= 6;
+                            } else if (c + 2 == 100) {
+                                c += 2;
+                                money1 -= 4;
+                            } else if (c + 1 == 100) {
+                                c += 1;
+                                money1 -= 2;
+                            } else {
+                                c += 5;
+                                money1 -= 10;
+                            }
+
+                            uraxutyun = String.valueOf(c);
+                            runOnUiThread(() -> gladness.setText(uraxutyun));
+                            money2 = String.valueOf(money1);
+                            runOnUiThread(() -> money.setText(money2));
+                        }
+
+
+                    });
+
+                    utel.setOnClickListener(view -> {
+                        if (a < 100 & money1 > 0) {
+                            if (a + 4 == 100) {
+                                a += 4;
+                                money1 -= 8;
+                            } else if (a + 3 == 100) {
+                                a += 3;
+                                money1 -= 6;
+                            } else if (a + 2 == 100) {
+                                a += 2;
+                                money1 -= 4;
+                            } else if (a + 1 == 100) {
+                                a += 1;
+                                money1 -= 2;
+                            } else {
+                                a += 5;
+                                money1 -= 10;
+                            }
+                            food = String.valueOf(a);
+                            runOnUiThread(() -> satiety.setText(food));
+                            money2 = String.valueOf(money1);
+                            runOnUiThread(() -> money.setText(money2));
+                        }
+
+                    });
                     while (is_started) {
-                        tarmanal.setOnClickListener(view -> {
-                            if(b<100){
-                                if(b+4==100){
-                                    b+=4;
-                                }
-                                else if(b+3==100){
-                                    b+=3;
-                                }
-                                else if(b+2==100){
-                                    b+=2;
-                                }
-                                else if(b+1==100){
-                                    b+=1;
-                                }
-                                else{
-                                    b+=5;
-                                }
 
-                                hognacutyun = String.valueOf(b);
-                                runOnUiThread(()-> fatigue.setText(hognacutyun));
-                            }
-
-
-
-                        });
-                        uraxanal.setOnClickListener(view -> {
-                            if(c<100){
-                                if(c+4==100){
-                                    c+=4;
-                                }
-                                else if(c+3==100){
-                                    c+=3;
-                                }
-                                else if(c+2==100){
-                                    c+=2;
-                                }
-                                else if(c+1==100){
-                                    c+=1;
-                                }
-                                else{
-                                    c+=5;
-                                }
-
-                                uraxutyun = String.valueOf(c);
-                                runOnUiThread(()-> gladness.setText(uraxutyun));
-                            }
-
-
-
-                        });
-
-                        utel.setOnClickListener(view -> {
-                            if(a<100){
-                                if(a+4==100){
-                                    a+=4;
-                                }
-                                else if(a+3==100){
-                                    a+=3;
-                                }
-                                else if(a+2==100){
-                                    a+=2;
-                                }
-                                else if(a+1==100){
-                                    a+=1;
-                                }
-                                else{
-                                    a+=5;
-                                }
-                                food = String.valueOf(a);
-                                runOnUiThread(()-> satiety.setText(food));
-                            }
-
-                        });
                         food = String.valueOf(a);
                         uraxutyun = String.valueOf(c);
                         hognacutyun = String.valueOf(b);
-
+                        money2 = String.valueOf(money1);
                         runOnUiThread(() -> {
                             satiety.setText(food);
                             gladness.setText(uraxutyun);
                             fatigue.setText(hognacutyun);
+                            money.setText(money2);
                         });
-                        if(a<=0||b<=0||c<=0){
+                        if (a <= 0 || b <= 0 || c <= 0) {
+
+
                             FileOutputStream fos = null;
                             FileInputStream fin = null;
 
@@ -204,14 +248,9 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
                                 }
                             }
 
+                            runOnUiThread(() -> finish.setText("The Game is finished, your marduk died.\n Your score was " + counter1 + "\n Your best result is " + element));
 
-
-
-
-
-                            runOnUiThread(() -> finish.setText("The Game is finished, your marduk died.\n Your score was "+counter1+"\n Your best result is "+ element));
-
-                            is_started=false;
+                            is_started = false;
                             break;
                         }
 
@@ -239,26 +278,20 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
                         c -= h;
 
 
-
-
-
-
-                        if(counter1==j+10){
-                            j=counter1;
+                        if (counter1 == j + 10) {
+                            j = counter1;
                             h++;
                         }
 
 
-
                     }
                 }
-
             }
 
         }.start();
 
-    }
 
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -269,8 +302,8 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
         is_started = false;
         PopupMenu popupMenu = new PopupMenu(this,v);
         popupMenu.setOnMenuItemClickListener( this);
-        popupMenu.inflate(R.menu.popup);
         stop.setVisibility(View.VISIBLE);
+        popupMenu.inflate(R.menu.popup);
         popupMenu.show();
     }
 
@@ -281,27 +314,25 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
 
         switch (item.getItemId()){
             case R.id.back:
-                Intent i = new Intent(MainActivity2.this,MainActivity.class);
+                Intent i = new Intent(MainActivity3.this,MainActivity.class);
                 i.putExtra("DIFF",diff);
                 startActivity(i);
                 finish();
                 stop.setVisibility(View.GONE);
-
                 is_started = true;
                 return true;
             case R.id.resume:
                 is_started = true;
                 stop.setVisibility(View.GONE);
-
                 return true;
             case R.id.restart:
-                a=100;b=100;c=100;counter1=0;h=1;
+                a=100;b=100;c=100;counter1=0;money1=100;h=1;
                 is_started = true;
                 stop.setVisibility(View.GONE);
-
                 return true;
             default:
                 is_started = true;
+                stop.setVisibility(View.GONE);
                 return false;
         }
 

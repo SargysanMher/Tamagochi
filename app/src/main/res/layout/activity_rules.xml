@@ -8,6 +8,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/back"
+        android:textSize="20dp"
+        android:text="X"
+        tools:ignore="MissingConstraints">
+
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
         android:text="asenq te stex graca pravilanery"
         android:textSize="25dp"
         tools:ignore="MissingConstraints" />

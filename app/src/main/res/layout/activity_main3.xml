@@ -7,16 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/i"
     tools:context=".MainActivity2">
-    <TextView
-        android:layout_width="match_parent"
-        android:id="@+id/stop"
-        android:visibility="gone"
-        android:text="the game is stopped"
-        android:textSize="25dp"
-        style="@style/CardView.Dark"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        tools:ignore="MissingConstraints" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +19,7 @@
             android:layout_height="wrap_content"
             android:textSize="25dp"
             style="@style/CardView.Dark"
+
             android:onClick="showPopup"
             android:text="menu">
 
@@ -46,27 +38,37 @@
 
         <TextView
             android:layout_width="wrap_content"
-            style="@style/CardView.Dark"
             android:layout_height="wrap_content"
+            style="@style/CardView.Dark"
             android:text="fatigue - " />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/CardView.Dark"
             android:text="gladness - " />
-<!--        <TextView-->
-<!--            android:text="money - "-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content">-->
+                <TextView
+                    android:text="money - "
+                    android:layout_width="wrap_content"
+                    style="@style/CardView.Dark"
+                    android:layout_height="wrap_content">
 
-<!--        </TextView>-->
+                </TextView>
 
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/stop"
+        android:visibility="gone"
+        android:text="the game is stopped"
+        android:textSize="25dp"
+        style="@style/CardView.Dark"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:ignore="MissingConstraints" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@id/a"
-
         android:orientation="vertical"
 
         tools:ignore="MissingConstraints">
@@ -77,30 +79,31 @@
         </View>
         <TextView
             android:layout_width="wrap_content"
+            style="@style/CardView.Dark"
             android:id="@+id/satiety"
-            style="@style/CardView.Dark"
             android:layout_height="wrap_content">
 
         </TextView>
         <TextView
             android:layout_width="wrap_content"
-            style="@style/CardView.Dark"
             android:id="@+id/fatigue"
+            style="@style/CardView.Dark"
             android:layout_height="wrap_content">
 
         </TextView>
         <TextView
             android:layout_width="wrap_content"
-            style="@style/CardView.Dark"
             android:id="@+id/gladness"
+            style="@style/CardView.Dark"
             android:layout_height="wrap_content">
 
         </TextView>
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:id="@+id/money"-->
-<!--            android:layout_height="wrap_content">-->
-<!--        </TextView>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/money"
+                    style="@style/CardView.Dark"
+                    android:layout_height="wrap_content">
+                </TextView>
     </LinearLayout>
 
     <TextView
@@ -123,6 +126,15 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="64dp">
 
+        <Button
+            android:id="@+id/ashxatel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="work"
+            tools:ignore="MissingConstraints">
+
+        </Button>
         <Button
             android:id="@+id/uraxanal"
             android:layout_width="wrap_content"
@@ -164,23 +176,14 @@
         android:id="@+id/finish"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         style="@style/CardView.Dark"
+
+        android:gravity="center"
         android:textSize="50dp"
         tools:ignore="MissingConstraints">
 
     </TextView>
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scrollbarSize="10000dp"
-        android:src="@drawable/urax_marduk"
-        app:layout_constraintTop_toBottomOf="@id/finish"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="83dp">
-
-    </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
