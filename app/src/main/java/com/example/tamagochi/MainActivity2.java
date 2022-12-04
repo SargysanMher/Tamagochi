@@ -11,7 +11,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +18,7 @@ import android.widget.Button;
 
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -29,13 +28,13 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
     Button uraxanal,utel,tarmanal;
     int a =100;
     int diff = 0;
-    int b =100;
+    int b =1;
     int c =100;
     int h = 1;
     int element = 0;
     int j = 0;
     int counter1;
-    private final static String FILE_NAME = "Best_Result_Tamagotchi_Easy";
+    private final static String FILE_NAME = "Best_Easy_Blya";
 
 
     @SuppressLint("MissingInflatedId")
@@ -156,49 +155,43 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
                             FileInputStream fin = null;
 
                             try {
-                                Log.d("asd1", "zibil0");
                                 fin = openFileInput(FILE_NAME);
-                                Log.d("asd", String.valueOf(element));
                                 element = fin.read();
-                                if(element ==-1){
-                                    fos = openFileOutput(FILE_NAME, MODE_APPEND);
-                                    fos.write(0);
-                                }
-                                Log.d("asd1", String.valueOf(element));
 
-                            } catch (FileNotFoundException e) {
-                                Log.d("asd1", String.valueOf(e));
                             } catch (IOException e) {
                                 e.printStackTrace();
-                            }finally {
-                                if(fin!=null) {
-                                    try {
+                            } finally {
+                                try {
+                                    if (fin != null) {
                                         fin.close();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
                                     }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
                                 }
                             }
 
-                            try {
-                                fos = openFileOutput(FILE_NAME, MODE_APPEND);
-                                if (counter1>element){
-                                    fos.write(counter1);
-                                    Log.d("asd2",String.valueOf(element));
-                                    fin = openFileInput(FILE_NAME);
-                                    element=fin.read();
 
-                                    Log.d("asd2",String.valueOf(element));
+                            try {
+
+                                if (counter1 > element) {
+                                    fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+                                    fos.write(counter1);
+                                    fin = openFileInput(FILE_NAME);
+                                    element = fin.read();
                                 }
 
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
+
                             } catch (IOException e) {
                                 e.printStackTrace();
-                            } finally{
-                                try{
-                                    if(fos!=null)
+                            } finally {
+
+                                try {
+                                    if (fos != null) {
                                         fos.close();
+                                    }
+                                    if (fin != null) {
+                                        fin.close();
+                                    }
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -226,8 +219,11 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
                         }
                         counter1++;
                         p = String.valueOf(counter1);
-                        runOnUiThread(() -> counter.setText(p));
-
+                        if(is_started){
+                            runOnUiThread(() -> counter.setText(p));
+                        }else{
+                            continue;
+                        }
 
                         try {
                             sleep(1000);
@@ -276,6 +272,7 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
 
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onMenuItemClick(MenuItem item) {
 
@@ -296,6 +293,7 @@ public class MainActivity2 extends AppCompatActivity implements PopupMenu.OnMenu
                 return true;
             case R.id.restart:
                 a=100;b=100;c=100;counter1=0;h=1;
+                finish.setText("");
                 is_started = true;
                 stop.setVisibility(View.GONE);
 

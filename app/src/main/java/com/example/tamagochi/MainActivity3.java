@@ -28,7 +28,7 @@ import android.widget.TextView;
 
 public class MainActivity3 extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private boolean is_started=true;
-    private final static String FILE_NAME = "Best_Result_Tamagotchi_Hard";
+    private final static String FILE_NAME = "Best_hard.txt";
     TextView satiety,fatigue,gladness,counter,finish,money,stop;
     String p,food,hognacutyun,uraxutyun,money2;
     Button uraxanal,utel,tarmanal,ashxatel;
@@ -37,8 +37,7 @@ public class MainActivity3 extends AppCompatActivity implements PopupMenu.OnMenu
     int c =100;
     int diff = 1;
     int h = 1;
-    int element = 1;
-    String resultat;
+    int element = 0;
     int j = 0;
     int money1 = 100;
     int counter1;
@@ -64,29 +63,6 @@ public class MainActivity3 extends AppCompatActivity implements PopupMenu.OnMenu
         uraxanal = findViewById(R.id.uraxanal);
 
 
-        File file = new File("Best.txt");
-
-        try {
-            PrintWriter pw = new PrintWriter(file);
-            pw.println(6);
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            while((resultat=br.readLine())!=null){
-                element = Integer.parseInt(resultat);
-            }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            PrintWriter pw = new PrintWriter(file);
-            if(element==0){
-                pw.print(0);
-                pw.close();
-
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
 
 
@@ -96,103 +72,8 @@ public class MainActivity3 extends AppCompatActivity implements PopupMenu.OnMenu
             @Override
             public void run() {
 
-                while (is_started) {
-                    ashxatel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            money1 += 5;
-                            b -= 5;
-                            money2 = String.valueOf(money1);
-                            runOnUiThread(() -> money.setText(money2));
-                            hognacutyun = String.valueOf(b);
-                            runOnUiThread(() -> fatigue.setText(hognacutyun));
-                        }
-                    });
-                    tarmanal.setOnClickListener(view -> {
-                        if (b < 100) {
-                            if (b + 4 == 100) {
-                                b += 4;
-                            } else if (b + 3 == 100) {
-                                b += 3;
-                            } else if (b + 2 == 100) {
-                                b += 2;
-                            } else if (b + 1 == 100) {
-                                b += 1;
-                            } else {
-                                b += 5;
-                            }
-
-                            hognacutyun = String.valueOf(b);
-                            runOnUiThread(() -> fatigue.setText(hognacutyun));
-                        }
-
-
-                    });
-                    uraxanal.setOnClickListener(view -> {
-                        if (c < 100 & money1 > 0) {
-                            if (c + 4 == 100) {
-                                c += 4;
-                                money1 -= 8;
-                            } else if (c + 3 == 100) {
-                                c += 3;
-                                money1 -= 6;
-                            } else if (c + 2 == 100) {
-                                c += 2;
-                                money1 -= 4;
-                            } else if (c + 1 == 100) {
-                                c += 1;
-                                money1 -= 2;
-                            } else {
-                                c += 5;
-                                money1 -= 10;
-                            }
-
-                            uraxutyun = String.valueOf(c);
-                            runOnUiThread(() -> gladness.setText(uraxutyun));
-                            money2 = String.valueOf(money1);
-                            runOnUiThread(() -> money.setText(money2));
-                        }
-
-
-                    });
-
-                    utel.setOnClickListener(view -> {
-                        if (a < 100 & money1 > 0) {
-                            if (a + 4 == 100) {
-                                a += 4;
-                                money1 -= 8;
-                            } else if (a + 3 == 100) {
-                                a += 3;
-                                money1 -= 6;
-                            } else if (a + 2 == 100) {
-                                a += 2;
-                                money1 -= 4;
-                            } else if (a + 1 == 100) {
-                                a += 1;
-                                money1 -= 2;
-                            } else {
-                                a += 5;
-                                money1 -= 10;
-                            }
-                            food = String.valueOf(a);
-                            runOnUiThread(() -> satiety.setText(food));
-                            money2 = String.valueOf(money1);
-                            runOnUiThread(() -> money.setText(money2));
-                        }
-
-                    });
+                while (true) {
                     while (is_started) {
-
-                        food = String.valueOf(a);
-                        uraxutyun = String.valueOf(c);
-                        hognacutyun = String.valueOf(b);
-                        money2 = String.valueOf(money1);
-                        runOnUiThread(() -> {
-                            satiety.setText(food);
-                            gladness.setText(uraxutyun);
-                            fatigue.setText(hognacutyun);
-                            money.setText(money2);
-                        });
                         if (a <= 0 || b <= 0 || c <= 0) {
 
 
@@ -200,72 +81,172 @@ public class MainActivity3 extends AppCompatActivity implements PopupMenu.OnMenu
                             FileInputStream fin = null;
 
                             try {
-                                Log.d("asd1", "zibil0");
                                 fin = openFileInput(FILE_NAME);
-                                Log.d("asd", String.valueOf(element));
                                 element = fin.read();
-                                if(element ==-1){
-                                    fos = openFileOutput(FILE_NAME, MODE_APPEND);
-                                    fos.write(0);
-                                }
-                                Log.d("asd1", String.valueOf(element));
 
-                            } catch (FileNotFoundException e) {
-                                Log.d("asd1", String.valueOf(e));
                             } catch (IOException e) {
                                 e.printStackTrace();
-                            }finally {
-                                if(fin!=null) {
-                                    try {
+                            } finally {
+                                try {
+                                    if (fin != null) {
                                         fin.close();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
                                     }
-                                }
-                            }
-
-                            try {
-                                fos = openFileOutput(FILE_NAME, MODE_APPEND);
-                                if (counter1>element){
-                                    fos.write(counter1);
-                                    Log.d("asd2",String.valueOf(element));
-                                    fin = openFileInput(FILE_NAME);
-                                    element=fin.read();
-
-                                    Log.d("asd2",String.valueOf(element));
-                                }
-
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            } finally{
-                                try{
-                                    if(fos!=null)
-                                        fos.close();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
                             }
 
-                            runOnUiThread(() -> finish.setText("The Game is finished, your marduk died.\n Your score was " + counter1 + "\n Your best result is " + element));
 
+                            try {
+
+                                if (counter1 > element) {
+                                    fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+                                    fos.write(counter1);
+                                    fin = openFileInput(FILE_NAME);
+                                    element = fin.read();
+                                }
+
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } finally {
+
+                                try {
+                                    if (fos != null) {
+                                        fos.close();
+                                    }
+                                    if (fin != null) {
+                                        fin.close();
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+
+
+
+                            runOnUiThread(() -> finish.setText("The Game is finished, your marduk died.\n Your score was " + counter1 + "\n Your best result is " + element));
                             is_started = false;
                             break;
                         }
+                        ashxatel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                money1 += 5;
+                                b -= 5;
+                                money2 = String.valueOf(money1);
+                                runOnUiThread(() -> money.setText(money2));
+                                hognacutyun = String.valueOf(b);
+                                runOnUiThread(() -> fatigue.setText(hognacutyun));
+                            }
+                        });
+                        tarmanal.setOnClickListener(view -> {
+                            if (b < 100) {
+                                if (b + 4 == 100) {
+                                    b += 4;
+                                } else if (b + 3 == 100) {
+                                    b += 3;
+                                } else if (b + 2 == 100) {
+                                    b += 2;
+                                } else if (b + 1 == 100) {
+                                    b += 1;
+                                } else {
+                                    b += 5;
+                                }
+
+                                hognacutyun = String.valueOf(b);
+                                runOnUiThread(() -> fatigue.setText(hognacutyun));
+                            }
 
 
-                        counter1++;
-                        p = String.valueOf(counter1);
-                        runOnUiThread(() -> counter.setText(p));
-                        try {
-                            sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        });
+                        uraxanal.setOnClickListener(view -> {
+                            if (c < 100 & money1 > 0) {
+                                if (c + 4 == 100) {
+                                    c += 4;
+                                    money1 -= 8;
+                                } else if (c + 3 == 100) {
+                                    c += 3;
+                                    money1 -= 6;
+                                } else if (c + 2 == 100) {
+                                    c += 2;
+                                    money1 -= 4;
+                                } else if (c + 1 == 100) {
+                                    c += 1;
+                                    money1 -= 2;
+                                } else {
+                                    c += 5;
+                                    money1 -= 10;
+                                }
+
+                                uraxutyun = String.valueOf(c);
+                                runOnUiThread(() -> gladness.setText(uraxutyun));
+                                money2 = String.valueOf(money1);
+                                runOnUiThread(() -> money.setText(money2));
+                            }
+
+
+                        });
+
+                        utel.setOnClickListener(view -> {
+                            if (a < 100 & money1 > 0) {
+                                if (a + 4 == 100) {
+                                    a += 4;
+                                    money1 -= 8;
+                                } else if (a + 3 == 100) {
+                                    a += 3;
+                                    money1 -= 6;
+                                } else if (a + 2 == 100) {
+                                    a += 2;
+                                    money1 -= 4;
+                                } else if (a + 1 == 100) {
+                                    a += 1;
+                                    money1 -= 2;
+                                } else {
+                                    a += 5;
+                                    money1 -= 10;
+                                }
+                                food = String.valueOf(a);
+                                runOnUiThread(() -> satiety.setText(food));
+                                money2 = String.valueOf(money1);
+                                runOnUiThread(() -> money.setText(money2));
+                            }
+
+                        });
+                        if(a>0&b>0&c>0){
+                            food = String.valueOf(a);
+                            uraxutyun = String.valueOf(c);
+                            hognacutyun = String.valueOf(b);
+                            money2 = String.valueOf(money1);
+                            runOnUiThread(() -> {
+                                satiety.setText(food);
+                                gladness.setText(uraxutyun);
+                                fatigue.setText(hognacutyun);
+                                money.setText(money2);
+                            });
+
+
+
+
+                            counter1++;
+                            p = String.valueOf(counter1);
+                            runOnUiThread(() -> counter.setText(p));
+                            try {
+                                sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            counter1++;
+                            p = String.valueOf(counter1);
+                            if(is_started){
+                                runOnUiThread(() -> counter.setText(p));
+                            }else{
+                                continue;
+                            }
                         }
-                        counter1++;
-                        p = String.valueOf(counter1);
-                        runOnUiThread(() -> counter.setText(p));
+
+
 
 
                         try {
@@ -328,6 +309,7 @@ public class MainActivity3 extends AppCompatActivity implements PopupMenu.OnMenu
             case R.id.restart:
                 a=100;b=100;c=100;counter1=0;money1=100;h=1;
                 is_started = true;
+                finish.setText("");
                 stop.setVisibility(View.GONE);
                 return true;
             default:
